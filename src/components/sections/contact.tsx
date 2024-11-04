@@ -34,7 +34,7 @@ export default function Contact() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit() {
     setIsSubmitting(true);
     try {
       // Here you would typically send the form data to your backend
