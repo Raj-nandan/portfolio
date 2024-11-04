@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Code2, Gamepad, Coffee, Brain, Trophy, BookOpen, Cpu, Rocket } from 'lucide-react';
+import { Code2, Coffee, Brain, Trophy, BookOpen, Cpu } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 
 const skills = [

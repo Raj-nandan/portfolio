@@ -31,7 +31,7 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
   ];
 
   return (
-    <section
+    <motion.section
       id="hero"
       className="min-h-[calc(100vh-8rem)] flex flex-col items-center justify-center text-center"
       onViewportEnter={() => setCurrentSection('hero')}
@@ -84,7 +84,7 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
           transition={{ delay: 0.5 }}
           className="flex gap-4 justify-center flex-wrap"
         >
-          {socialLinks.map((link, index) => (
+          {socialLinks.map((link) => (
             <HoverCard key={link.name}>
               <HoverCardTrigger asChild>
                 <Button variant="outline" size="icon" asChild>
@@ -128,6 +128,6 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
           </Button>
         </motion.div>
       </motion.div>
-    </section>
+    </motion.section>
   );
 }
