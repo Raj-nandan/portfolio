@@ -88,9 +88,9 @@ export default function About() {
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold">About Me</h2>
           <p className="text-muted-foreground max-w-3xl mx-auto">
-            With over 5 years of experience in full-stack development, I specialize in building
-            scalable web applications and creating engaging user experiences. I'm passionate about
-            clean code, performance optimization, and staying current with emerging technologies.
+          I am a final-year B.Tech student in Information Technology with a passion for full-stack development and data-driven solutions. My experience includes building dynamic applications like Drishti, an IoT and ML-based assistive technology for the visually impaired, and SkillSaga, an e-learning platform. Skilled in React, Node.js, C++, Python, I focus on creating impactful, user-centered solutions. I’m eager to apply my technical knowledge to innovative projects and continuously grow in a collaborative environment.
+
+
           </p>
         </div>
 
