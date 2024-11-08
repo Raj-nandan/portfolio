@@ -7,6 +7,9 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 
+import profileimage from '@/asset/pic.jpg'
+import resume from '@/asset/Raj_Nandan_resume.pdf'
+
 export default function Hero({ setCurrentSection }: { setCurrentSection: (section: string) => void }) {
   const socialLinks = [
     {
@@ -49,7 +52,7 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
           className="relative w-40 h-40 mx-auto"
         >
           <img
-            src="src\asset\pic.jpg"
+            src={profileimage}
             alt="Profile"
             className="rounded-full object-cover w-full h-full border-4 border-primary/20"
           />
@@ -121,7 +124,7 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
             </a>
           </Button>
           <Button variant="outline" asChild>
-            <a href="src\asset\Raj_Nandan_resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href={resume} target="_blank" rel="noopener noreferrer">
               Download Resume
               <ExternalLink className="ml-2 h-4 w-4" />
             </a>
