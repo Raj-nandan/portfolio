@@ -1,46 +1,40 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-});
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
   });
 
-  async function onSubmit() {
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Submit handler function
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true);
+
     try {
-      // Here you would typically send the form data to your backend
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+      // Send the form data to your backend email API
+      await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
       toast.success('Message sent successfully!');
-      form.reset();
+      setFormData({ name: '', email: '', message: '' }); // Reset form data
     } catch (error) {
       toast.error('Failed to send message. Please try again.');
     }
@@ -49,13 +43,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="max-w-2xl mx-auto space-y-12"
-      >
+      <div className="max-w-2xl mx-auto space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-3xl font-bold">Get in Touch</h2>
           <p className="text-muted-foreground">
@@ -63,60 +51,43 @@ export default function Contact() {
           </p>
         </div>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
+        <form onSubmit={onSubmit} className="space-y-6">
+          <div>
+            <label>Name</label>
+            <Input
               name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Your name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              placeholder="Your name"
+              value={formData.name}
+              onChange={handleChange}
             />
+          </div>
 
-            <FormField
-              control={form.control}
+          <div>
+            <label>Email</label>
+            <Input
               name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="your@email.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              placeholder="your@email.com"
+              value={formData.email}
+              onChange={handleChange}
             />
+          </div>
 
-            <FormField
-              control={form.control}
+          <div>
+            <label>Message</label>
+            <Textarea
               name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Message</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Your message..."
-                      className="min-h-[150px]"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              placeholder="Your message..."
+              className="min-h-[150px]"
+              value={formData.message}
+              onChange={handleChange}
             />
+          </div>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </Button>
-          </form>
-        </Form>
-      </motion.div>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </Button>
+        </form>
+      </div>
     </section>
   );
 }
