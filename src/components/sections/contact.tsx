@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
+import emailjs from '@emailjs/browser';
+// import { toast } from 'sonner';
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -12,34 +13,64 @@ export default function Contact() {
     message: '',
   });
 
-  // Handle input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  
+
+  const [status, setStatus] = useState({ type: '', message: '' });
 
   // Submit handler function
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); // Prevent default form submission
     setIsSubmitting(true);
 
-    try {
-      // Send the form data to your backend email API
-      await fetch('http://localhost:5000/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const serviceId = import.meta.env.VITE_EMAIL_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
 
-      toast.success('Message sent successfully!');
-      setFormData({ name: '', email: '', message: '' }); // Reset form data
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus({
+        type: 'error',
+        message: 'Email service configuration is missing.'
+      });
+      return;
+    }
+
+    try {
+      await emailjs.sendForm(
+        serviceId,
+        templateId,
+        e.target as HTMLFormElement,
+        { publicKey }
+      );
+      
+      setStatus({
+        type: 'success',
+        message: 'Message sent successfully!'
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      setStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again.'
+      });
+      console.error('Email error:', error);
     }
     setIsSubmitting(false);
-  }
+  };
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  
 
   return (
     <section id="contact" className="py-20">
@@ -86,6 +117,12 @@ export default function Contact() {
           <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </Button>
+
+          {status.message && (
+            <p className={`text-center ${status.type === 'error' ? 'text-red-500' : 'text-green-500'}`}>
+              {status.message}
+            </p>
+          )}
         </form>
       </div>
     </section>
