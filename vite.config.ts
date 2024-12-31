@@ -9,4 +9,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/leetcode-api': {
+        target: 'https://leetcode.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/leetcode-api/, ''),
+      },
+    },
+  },
 });

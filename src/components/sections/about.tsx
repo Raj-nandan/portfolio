@@ -2,6 +2,15 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Code2, Coffee, Brain, Trophy, BookOpen, Cpu } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { useState, useEffect } from 'react';
+import { fetchLeetCodeStats } from '@/hooks/leetcode';
+
+interface LeetCodeData {
+  rank: string;
+  solved: string;
+  contests: string;
+  rating: string;
+}
 
 const skills = [
   { name: 'Frontend', icon: Code2, description: 'React, Vue, TypeScript, Next.js' },
@@ -10,71 +19,80 @@ const skills = [
   { name: 'CS', icon: Cpu, description: 'System Design, Networking, OOPS, DBMS' },
 ];
 
-const codingProfiles = [
-  {
-    platform: 'LeetCode',
-    icon: Trophy,
-    stats: {
-      rank: '241,986',
-      solved: '350+',
-      contests: '7+',
-      rating: '1464',
-    },
-    url: 'https://leetcode.com/u/nandanraj098/',
-    color: 'from-yellow-500 to-orange-500',
-  },
-  {
-    platform: 'GeeksforGeeks',
-    icon: BookOpen,
-    stats: {
-      rank: 'Institute Rank 15',
-      solved: '450+',
-      score: '1000',
-      rating: '1731',
-    },
-    url: 'https://www.geeksforgeeks.org/user/nandanr532/',
-    color: 'from-green-500 to-emerald-500',
-  },
-  // {
-  //   platform: 'CodeForces',
-  //   icon: Rocket,
-  //   stats: {
-  //     rank: 'Expert',
-  //     rating: '1750',
-  //     contests: '40+',
-  //     solved: '500+',
-  //   },
-  //   url: 'https://codeforces.com/profile/yourusername',
-  //   color: 'from-blue-500 to-violet-500',
-  // },
-];
-
-const experiences = [
-  {
-    title: '2nd position in Ideathon',
-    company: 'NEO-Virtual Assistant',
-    period: '2022',
-    description: 'An AI virtual assistant for laptop and PCs to perform various task using voice commands.',
-    skills: ['Python', 'Tk-Inter', 'Open-AI'],
-  },
-  {
-    title: '3rd Position in Hackathon',
-    company: 'MERN project',
-    period: '2023',
-    description: 'Developed and maintained multiple client projects using modern web technologies.',
-    skills: ['React', 'Node.js', 'MongoDB', 'Vercel'],
-  },
-];
-
-const technicalSkills = [
-  { name: 'C++', progress: 95 },
-  { name: 'Node.js', progress: 70 },
-  { name: 'React/Next.js', progress: 85 },
-  { name: 'Python', progress: 50 },
-  { name: 'Git/GitHub', progress: 95 },
-];
-
 export default function About() {
+  const [leetcodeData, setLeetcodeData] = useState<LeetCodeData | null>(null);
+
+  useEffect(() => {
+    const getLeetCodeData = async () => {
+      try {
+        const stats = await fetchLeetCodeStats();
+        setLeetcodeData(stats);
+      } catch (error) {
+        console.error('Error fetching LeetCode data:', error);
+        setLeetcodeData({
+          rank: 'N/A',
+          solved: 'N/A',
+          rating: 'N/A',
+          contests: 'N/A'
+        });
+      }
+    };
+
+    getLeetCodeData();
+  }, []);
+
+  const codingProfiles = [
+    {
+      platform: 'LeetCode',
+      icon: Trophy,
+      stats: leetcodeData || {
+        rank: 'Loading...',
+        solved: 'Loading...',
+        contests: 'Loading...',
+        rating: 'Loading...',
+      },
+      url: 'https://leetcode.com/u/nandanraj098/',
+      color: 'from-yellow-500 to-orange-500',
+    },
+    {
+      platform: 'GeeksforGeeks',
+      icon: BookOpen,
+      stats: {
+        rank: 'Institute Rank 15',
+        solved: '450+',
+        score: '1000',
+        rating: '1731',
+      },
+      url: 'https://www.geeksforgeeks.org/user/nandanr532/',
+      color: 'from-green-500 to-emerald-500',
+    },
+  ];
+
+  const experiences = [
+    {
+      title: '2nd position in Ideathon',
+      company: 'NEO-Virtual Assistant',
+      period: '2022',
+      description: 'An AI virtual assistant for laptop and PCs to perform various task using voice commands.',
+      skills: ['Python', 'Tk-Inter', 'Open-AI'],
+    },
+    {
+      title: '3rd Position in Hackathon',
+      company: 'MERN project',
+      period: '2023',
+      description: 'Developed and maintained multiple client projects using modern web technologies.',
+      skills: ['React', 'Node.js', 'MongoDB', 'Vercel'],
+    },
+  ];
+
+  const technicalSkills = [
+    { name: 'C++', progress: 95 },
+    { name: 'Node.js', progress: 70 },
+    { name: 'React/Next.js', progress: 85 },
+    { name: 'Python', progress: 50 },
+    { name: 'Git/GitHub', progress: 95 },
+  ];
+
   return (
     <section id="about" className="py-20">
       <motion.div
