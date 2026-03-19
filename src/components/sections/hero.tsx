@@ -95,7 +95,7 @@ export default function Hero({ setCurrentSection }: { setCurrentSection: (sectio
             </a>
           </Button>
           <Button asChild variant="outline" size="lg" className="rounded-full px-8 border-border hover:border-accent/50 hover:bg-accent/5 hover:text-foreground">
-            <a href="public/Raj_Nandan_resume.pdf" download>
+            <a href="./Raj_Nandan_resume.pdf" download="Raj_Nandan_resume.pdf">
               <Download className="mr-2 h-4 w-4" />
               Resume
             </a>
