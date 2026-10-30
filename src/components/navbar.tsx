@@ -8,11 +8,11 @@ export default function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-30 w-full"
+      className="sticky top-0 z-30 hidden w-full md:block"
       style={{ backgroundColor: 'var(--bg)', borderBottom: '1px solid var(--line)' }}
     >
       <div
-        className="mx-auto flex max-w-[800px] flex-wrap items-center justify-between gap-3 border-x px-5 py-2.5"
+        className="mx-auto flex max-w-[800px] flex-wrap items-center justify-between gap-2 border-x px-4 py-2.5 sm:gap-3 sm:px-5"
         style={{ borderColor: 'var(--line)' }}
       >
         <a
@@ -20,12 +20,12 @@ export default function Navbar() {
           aria-label="Home"
           onClick={(e) => { e.preventDefault(); navigate('/'); }}
           className="flex h-9 w-9 items-center justify-center rounded-lg text-sm font-medium"
-          style={{ backgroundColor: 'var(--fg)', color: 'var(--bg)', fontFamily: "'Geist Mono', monospace" }}
+          style={{ backgroundColor: 'var(--fg)', color: 'var(--bg)', fontFamily: "var(--font-sans)" }}
         >
           RN
         </a>
 
-        <nav className="flex flex-wrap items-center gap-5 text-sm font-medium">
+        <nav className="flex flex-wrap items-center gap-3 text-sm font-medium sm:gap-5">
           <a className="navlink" href="/projects" onClick={(e) => { e.preventDefault(); navigate('/projects'); }}>Projects</a>
           <a className="navlink" href="/#experience">Experience</a>
           <a className="navlink" href="/#stack">Stack</a>

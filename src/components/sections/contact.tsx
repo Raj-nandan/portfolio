@@ -28,7 +28,7 @@ export default function Contact() {
             }}
           >
             <span className="flex flex-col gap-[3px]">
-              <span className="text-[11px] uppercase tracking-[0.04em]" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--muted)' }}>
+              <span className="text-[11px] uppercase tracking-[0.04em]" style={{ fontFamily: "var(--font-sans)", color: 'var(--muted)' }}>
                 {r.label}
               </span>
               <span className="text-sm font-medium">{r.value}</span>

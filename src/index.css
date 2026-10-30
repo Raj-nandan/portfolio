@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: 'Geist', system-ui, sans-serif;
+  --font-sans: 'Cabin Sketch', system-ui, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   font-weight: 400;
   font-synthesis: none;
@@ -86,8 +87,13 @@ html, body {
     @apply bg-background text-foreground;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Geist', sans-serif;
+  h1, h2{
+    font-family: 'Cabin Sketch', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  h3, h4, h5, h6 {
+    font-family: 'Cabin Sketch', sans-serif;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
@@ -212,6 +218,11 @@ html {
 }
 body {
   font-family: 'Geist', system-ui, sans-serif;
+}
+*:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 .font-mono-geist {
   font-family: 'Geist Mono', monospace;

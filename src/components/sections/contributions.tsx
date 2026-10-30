@@ -104,7 +104,7 @@ export default function Contributions() {
             </div>
           </div>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-2.5 text-[13px]" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--sub)' }}>
+        <div className="flex flex-wrap items-center justify-between gap-2.5 text-[13px]" style={{ fontFamily: "var(--font-sans)", color: 'var(--sub)' }}>
           <span>
             {total === null ? (error ? '—' : 'Loading…') : `${total} contributions in the last year on `}
             {total !== null && (

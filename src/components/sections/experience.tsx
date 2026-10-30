@@ -9,7 +9,7 @@ export default function Experience() {
           <span className="tl-dot" />
           <div className="flex flex-wrap items-baseline justify-between gap-1.5">
             <h3 className="text-base font-semibold">BARQ</h3>
-            <span className="text-xs" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--muted)' }}>Mar 2025 – Aug 2025</span>
+            <span className="text-xs" style={{ fontFamily: "var(--font-sans)", color: 'var(--muted)' }}>Mar 2025 – Aug 2025</span>
           </div>
           <span className="text-sm" style={{ color: 'var(--sub)' }}>Site Reliability Engineering Intern · Bengaluru</span>
           <ul className="m-0 mt-1 flex flex-col gap-1.5 pl-[18px] text-sm leading-[1.6]" style={{ color: 'var(--body)' }}>
@@ -26,7 +26,7 @@ export default function Experience() {
           <span className="tl-dot" />
           <div className="flex flex-wrap items-baseline justify-between gap-1.5">
             <h3 className="text-base font-semibold">College of Engineering Roorkee</h3>
-            <span className="text-xs" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--muted)' }}>2021 to 2025</span>
+            <span className="text-xs" style={{ fontFamily: "var(--font-sans)", color: 'var(--muted)' }}>2021 to 2025</span>
           </div>
           <span className="text-sm" style={{ color: 'var(--sub)' }}>B.Tech, Information Technology</span>
         </div>

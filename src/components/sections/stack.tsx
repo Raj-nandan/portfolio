@@ -12,15 +12,15 @@ export default function Stack() {
     <section id="stack" className="reveal border-t px-5 py-[72px] pb-6" style={{ borderColor: 'var(--line)' }}>
       <div className="mb-7 flex flex-wrap items-baseline justify-between gap-2.5">
         <h2 className="text-[32px] font-semibold tracking-[-0.03em]">Stack</h2>
-        <span className="text-[13px]" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--accent)' }}>
+        <span className="text-[13px]" style={{ fontFamily: "var(--font-sans)", color: 'var(--accent)' }}>
           Can build things around these technologies, and always learning more.
         </span>
       </div>
       <div className="stack-list flex flex-col" style={{ margin: '0 -20px' }}>
         {groups.map((g) => (
           <div key={g.num} className="srow flex flex-wrap items-start gap-3 px-5 py-[22px]" style={{ borderTop: '1px solid var(--line)' }}>
-            <span className="flex w-[190px] flex-none items-baseline gap-3.5 text-lg">
-              <span className="snum text-[13px]" style={{ fontFamily: "'Geist Mono', monospace", color: 'var(--muted)' }}>{g.num}</span>
+            <span className="flex w-full flex-none items-baseline gap-3.5 text-lg sm:w-[190px]">
+              <span className="snum text-[13px]" style={{ fontFamily: "var(--font-sans)", color: 'var(--muted)' }}>{g.num}</span>
               <span className="sname font-medium">{g.title}</span>
             </span>
             <div className="flex flex-1 basis-[300px] flex-wrap gap-2">

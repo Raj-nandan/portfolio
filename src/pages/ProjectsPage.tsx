@@ -47,7 +47,7 @@ export default function ProjectsPage() {
                     <div className="thumb-art" style={{ background: p.art }} />
                     <span
                       className="absolute bottom-3 left-3 rounded-md border px-2 py-0.5 text-[11px]"
-                      style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)', fontFamily: "'Geist Mono', monospace", color: 'var(--muted)' }}
+                      style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)', fontFamily: "var(--font-sans)", color: 'var(--muted)' }}
                     >
                       [SCREENSHOT]
                     </span>
@@ -62,7 +62,7 @@ export default function ProjectsPage() {
                 <p className="text-sm leading-[1.6]" style={{ color: 'var(--body)' }}>{p.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {p.tags.map((t) => (
-                    <span key={t} className="rounded-md border px-2 py-0.5 text-[11px]" style={{ backgroundColor: 'var(--soft)', borderColor: 'var(--line)', fontFamily: "'Geist Mono', monospace", color: 'var(--body)' }}>
+                    <span key={t} className="rounded-md border px-2 py-0.5 text-[11px]" style={{ backgroundColor: 'var(--soft)', borderColor: 'var(--line)', fontFamily: "var(--font-sans)", color: 'var(--body)' }}>
                       {t}
                     </span>
                   ))}

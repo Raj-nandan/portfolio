@@ -1,4 +1,5 @@
 import Navbar from './navbar';
+import BottomDock from './bottom-dock';
 import type { ReactNode } from 'react';
 
 export default function Shell({ children }: { children: ReactNode }) {
@@ -10,7 +11,7 @@ export default function Shell({ children }: { children: ReactNode }) {
       <Navbar />
       <main
         id="top"
-        className="relative z-10 mx-auto w-full max-w-[800px] border-x"
+        className="relative z-10 mx-auto w-full max-w-[800px] overflow-x-hidden border-x pb-24 md:pb-0"
         style={{ borderColor: 'var(--line)', backgroundColor: 'var(--bg)' }}
       >
         {children}
@@ -18,13 +19,14 @@ export default function Shell({ children }: { children: ReactNode }) {
           className="flex flex-col gap-6 overflow-hidden px-5 py-8"
           style={{ borderTop: '1px solid var(--line)' }}
         >
-          <div className="mark" aria-hidden="true">Raj Nandan</div>
+          <div className="mark text-center" aria-hidden="true">Raj Nandan</div>
           <div className="flex flex-wrap items-center justify-between gap-2.5 text-xs" style={{ color: 'var(--muted)' }}>
             <span>Last updated · October 30, 2026</span>
-            <span style={{ fontFamily: "'Geist Mono', monospace" }}>© 2026 Raj Nandan</span>
+            <span style={{ fontFamily: "var(--font-sans)" }}>© 2026 Raj Nandan</span>
           </div>
         </footer>
       </main>
+      <BottomDock />
     </div>
   );
 }
