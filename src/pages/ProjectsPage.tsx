@@ -41,7 +41,7 @@ export default function ProjectsPage() {
             <article key={p.name} className="card">
               <div className="thumb">
                 {p.image ? (
-                  <img src={p.image} alt={p.name} className="absolute inset-0 h-full w-full object-cover" />
+                  <img src={p.image} alt={p.name} className="absolute inset-0 h-full w-full object-fit" />
                 ) : (
                   <>
                     <div className="thumb-art" style={{ background: p.art }} />
